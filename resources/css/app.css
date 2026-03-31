@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@source "../js/**/*.vue";
+@import "./layout.css";
+@theme inline {
+    --color-doge: #D4AF37;
+    --color-dogelight: #E1B305;
+    --color-dogedark: #A68A2D;
+    --color-midnight: #121417;
+    --color-tile-base: #0F1114;
+    --color-tile-soft: #15181D;
+    --color-tile-muted: #1B1F26;
+    --color-tile-accent: #232834;
+    --color-tile-highlight: #2B3242;
+    --color-doge-accent-1: #FFD966;
+    --color-doge-accent-2: #C89B2C;
+    --color-doge-accent-3: #F2C94C;
+    --color-doge-accent-4: #B58921;
+    --color-grid-line: rgba(255, 255, 255, 0.08);
+    --color-grid-soft: rgba(255, 255, 255, 0.04);
+    --font-doge: "Montserrat", "Inter", sans-serif;
+}
+html, body {
+    background-color: #ffffff;
+    font: var(--font-doge);
+}

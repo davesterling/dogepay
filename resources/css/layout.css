@@ -1,0 +1,255 @@
+
+:root {
+    /* Sidebar */
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 0px;
+    --topbar-height: 56px;
+
+    /* Dark theme (default) */
+    --layout-bg:              #0f1114;
+    --layout-sidebar-bg:      #15181d;
+    --layout-topbar-bg:       #15181d;
+    --layout-border:          rgba(255,255,255,0.06);
+    --layout-text:            #cbd5e1;       /* slate-300 */
+    --layout-text-muted:      #64748b;       /* slate-500 */
+    --layout-text-subtle:     #475569;       /* slate-600 */
+    --layout-hover-bg:        rgba(255,255,255,0.05);
+    --layout-active-bg:       rgba(212,175,55,0.12);
+    --layout-active-text:     #D4AF37;
+    --layout-icon:            #94a3b8;       /* slate-400 */
+    --layout-separator:       rgba(255,255,255,0.06);
+    --layout-card-bg:         #1b1f26;
+    --layout-shadow:          0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* Light theme */
+.layout-light {
+    --layout-bg:              #f8fafc;
+    --layout-sidebar-bg:      #ffffff;
+    --layout-topbar-bg:       #ffffff;
+    --layout-border:          rgba(0,0,0,0.08);
+    --layout-text:            #1e293b;       /* slate-800 */
+    --layout-text-muted:      #64748b;       /* slate-500 */
+    --layout-text-subtle:     #94a3b8;       /* slate-400 */
+    --layout-hover-bg:        rgba(0,0,0,0.04);
+    --layout-active-bg:       rgba(212,175,55,0.1);
+    --layout-active-text:     #A68A2D;
+    --layout-icon:            #64748b;
+    --layout-separator:       rgba(0,0,0,0.07);
+    --layout-card-bg:         #ffffff;
+    --layout-shadow:          0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* ── Base reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Layout wrapper ── */
+.layout-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: var(--layout-bg);
+    color: var(--layout-text);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ── Sidebar ── */
+.layout-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: var(--layout-sidebar-bg);
+    border-right: 1px solid var(--layout-border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    transition: transform 0.25s ease, width 0.25s ease;
+    overflow: hidden;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: var(--topbar-height);
+    border-bottom: 1px solid var(--layout-border);
+    flex-shrink: 0;
+}
+
+.sidebar-header .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar-header img {
+    height: 28px;
+    width: auto;
+}
+
+/* Anchor toggle button */
+.layout-sidebar-anchor {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--layout-border);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+}
+.layout-sidebar-anchor:hover,
+.layout-sidebar-anchored .layout-sidebar-anchor {
+    background: var(--layout-active-text);
+    border-color: var(--layout-active-text);
+}
+
+/* Menu container */
+.layout-menu-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.75rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--layout-border) transparent;
+}
+.layout-menu-container::-webkit-scrollbar { width: 4px; }
+.layout-menu-container::-webkit-scrollbar-thumb { background: var(--layout-border); border-radius: 2px; }
+
+/* ── Menu ── */
+.layout-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.layout-menu li {
+    margin: 0;
+}
+
+.menu-separator {
+    height: 1px;
+    background: var(--layout-separator);
+    margin: 0.4rem 1rem;
+}
+
+.layout-menuitem-root-text {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--layout-text-subtle);
+    padding: 0.75rem 1.25rem 0.25rem;
+}
+
+.layout-root-menuitem > a,
+.layout-root-menuitem > .router-link-active {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 1.25rem;
+    text-decoration: none;
+    color: var(--layout-text);
+    font-size: 0.875rem;
+    border-radius: 0;
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+}
+
+.layout-root-menuitem > a:hover,
+.layout-root-menuitem > a.active-route {
+    background: var(--layout-hover-bg);
+    color: var(--layout-active-text);
+}
+
+.active-menuitem > a,
+.active-menuitem > a.active-route {
+    background: var(--layout-active-bg);
+    color: var(--layout-active-text);
+}
+
+.layout-menuitem-icon {
+    font-size: 1rem;
+    color: var(--layout-icon);
+    width: 1.25rem;
+    flex-shrink: 0;
+}
+
+.active-route .layout-menuitem-icon,
+.active-menuitem .layout-menuitem-icon {
+    color: var(--layout-active-text);
+}
+
+.layout-menuitem-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.layout-submenu-toggler {
+    font-size: 0.7rem;
+    color: var(--layout-text-muted);
+    transition: transform 0.2s;
+}
+.active-menuitem > a .layout-submenu-toggler {
+    transform: rotate(180deg);
+}
+
+/* Submenu */
+.layout-root-submenulist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.layout-root-submenulist li > a,
+.layout-root-submenulist li > .router-link-active {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.45rem 1.25rem 0.45rem 2.75rem;
+    text-decoration: none;
+    color: var(--layout-text-muted);
+    font-size: 0.8rem;
+    transition: background 0.15s, color 0.15s;
+    cursor: pointer;
+}
+.layout-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout-content-wrapper-inside {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.layout-content {
+    flex: 1;
+    padding: 1.5rem;
+    padding-top: 3.5rem; /* account for fixed topbar */
+}
+
+.layout-footer {
+    border-top: 1px solid var(--layout-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1.25rem;
+    background: var(--layout-sidebar-bg);
+    color: var(--layout-text-muted);
+    font-size: 0.75rem;
+}
+.layout-content {
+    flex: 1;
+    padding: 1.5rem;
+    padding-top: 3.5rem;   /* fixed topbar */
+    padding-bottom: 3rem;  /* fixed footer */
+}
