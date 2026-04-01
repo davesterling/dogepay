@@ -121,7 +121,7 @@
 </template>
 
 <script setup>
-import Faqs from '@/Components/web/Faqs.vue'
+import Faqs from '@/Components/Web/Faqs.vue'
 
 const values = [
     {
